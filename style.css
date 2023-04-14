@@ -1,0 +1,94 @@
+*,
+*::before,
+/* Global Reset */
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+/* Page overall */
+
+:root {
+  --bg: #000000;
+  --main: silver;
+  --secondary: darkgray;
+  --dark: #000000;
+  --display: darkgreen;
+  --display-text: #000000;
+  --delete: red;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--main);
+}
+
+main {
+  background-color: var(--main);
+}
+
+.container {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+/* buttons */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.buttons,
+.row {
+  gap: 16px;
+}
+
+.row {
+  text-align: center;
+}
+
+.first-row,
+.second-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 1 / -1;
+}
+
+.third-row {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.fourth-row {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: fit-content;
+}
+
+.zero {
+  grid-column: 1 / span 2;
+}
+
+/* screen */
+
+.screen {
+  color: var(--display-text);
+  background-color: var(--display);
+}
+
+.screen p {
+  text-align: right;
+  margin-right: 32px;
+}
+
+/* buttons */
+
+.btn {
+  color: var(--dark);
+  background-color: var(--secondary);
+}
