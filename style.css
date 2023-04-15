@@ -45,85 +45,6 @@ main {
 }
 
 /* buttons */
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
-
-.add {
-  grid-column: 4;
-  grid-row: 2;
-}
-
-.substract {
-  grid-column: 4;
-  grid-row: 3;
-}
-
-.multiply {
-  grid-column: 4;
-  grid-row: 4;
-}
-
-.divide {
-  grid-column: 4;
-  grid-row: 5;
-}
-
-.buttons {
-  padding: 16px;
-  gap: 16px;
-}
-
-.first-row,
-.second-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  grid-column: 1 / -1;
-}
-
-.third-row {
-  grid-column: 1/-1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.fourth-row {
-  grid-column: 1/-1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: fit-content;
-}
-
-.zero {
-  grid-column: 1;
-}
-
-/* screen */
-
-.screen {
-  color: var(--display-text);
-  background-color: var(--display);
-  width: 100%;
-}
-
-.previous-result {
-  opacity: 50%;
-  font-size: 16px;
-}
-
-.current-result {
-  font-size: 32px;
-}
-
-.results {
-  text-align: right;
-  padding: 16px 32px;
-}
-
-/* buttons */
 
 .btn {
   color: var(--dark);
@@ -152,4 +73,96 @@ main {
   width: 92%;
   transition: 200ms;
   box-shadow: 0 4px 0 0 black;
+}
+
+.btn-equal {
+  grid-column: 3 / span 2;
+  width: 100%;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.add {
+  grid-column: 4;
+  grid-row: 4;
+}
+
+.divide,
+.substract,
+.multiply,
+.add {
+  background-color: blue;
+}
+
+.substract {
+  grid-column: 4;
+  grid-row: 3;
+}
+
+.multiply {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.divide {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.buttons {
+  padding: 16px;
+  gap: 16px;
+}
+
+.first-row,
+.second-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 1 / -1;
+}
+
+.third-row {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.fourth-row {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: fit-content;
+}
+
+/* screen */
+
+.screen {
+  color: var(--display-text);
+  background-color: var(--display);
+  width: 100%;
+  font-size: 48px;
+}
+
+.previous-result {
+  opacity: 50%;
+  font-size: 16px;
+}
+
+.current-result {
+  font-size: 32px;
+}
+
+.previous-result:empty::before {
+  content: "";
+  display: inline-block;
+}
+
+.results {
+  text-align: right;
+  padding: 32px 24px;
 }
