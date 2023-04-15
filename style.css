@@ -6,10 +6,19 @@
   padding: 0;
 }
 
+*::selection {
+  color: initial;
+  background-color: transparent;
+}
+
+* {
+  cursor: default;
+}
+
 /* Page overall */
 
 :root {
-  --bg: #000000;
+  --bg: #747474;
   --main: silver;
   --secondary: darkgray;
   --dark: #000000;
@@ -21,16 +30,18 @@
 body {
   background-color: var(--bg);
   color: var(--main);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-main {
+.calculator {
   background-color: var(--main);
 }
 
-.container {
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+main {
+  box-shadow: 0 8px 0 0 black;
 }
 
 /* buttons */
@@ -40,13 +51,29 @@ main {
   grid-template-rows: repeat(4, 1fr);
 }
 
-.buttons,
-.row {
-  gap: 16px;
+.add {
+  grid-column: 4;
+  grid-row: 2;
 }
 
-.row {
-  text-align: center;
+.substract {
+  grid-column: 4;
+  grid-row: 3;
+}
+
+.multiply {
+  grid-column: 4;
+  grid-row: 4;
+}
+
+.divide {
+  grid-column: 4;
+  grid-row: 5;
+}
+
+.buttons {
+  padding: 16px;
+  gap: 16px;
 }
 
 .first-row,
@@ -71,7 +98,7 @@ main {
 }
 
 .zero {
-  grid-column: 1 / span 2;
+  grid-column: 1;
 }
 
 /* screen */
@@ -79,11 +106,21 @@ main {
 .screen {
   color: var(--display-text);
   background-color: var(--display);
+  width: 100%;
 }
 
-.screen p {
+.previous-result {
+  opacity: 50%;
+  font-size: 16px;
+}
+
+.current-result {
+  font-size: 32px;
+}
+
+.results {
   text-align: right;
-  margin-right: 32px;
+  padding: 16px 32px;
 }
 
 /* buttons */
@@ -91,4 +128,28 @@ main {
 .btn {
   color: var(--dark);
   background-color: var(--secondary);
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms;
+}
+
+.btn:hover {
+  margin: 1.5%;
+  height: 96%;
+  width: 96%;
+  transition: 500ms;
+  box-shadow: 0 8px 0 0 black;
+}
+
+.btn:active {
+  margin: 3%;
+  height: 92%;
+  width: 92%;
+  transition: 200ms;
+  box-shadow: 0 4px 0 0 black;
 }
