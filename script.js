@@ -9,14 +9,15 @@ const calculator = document.querySelector(".calculator"),
   btnNumber = document.querySelectorAll(".btn-number"),
   clearEverythingBtn = document.querySelector("CE");
 
-let memory = 0; // "memory" of our calc, which stores a part of a calculation
-let chosenOperation;
-let pOp;
-let result;
-// let calcIsOn = 0; // making possible to change result displayed on the screen
-// const addToMemory = (num) => (memory = Number(num));
-
 // --- Buttons ---
+
+// Variables
+
+let memory = 0;
+let newCalculation = false;
+let result = 0;
+let operation = "";
+let prevOp = "";
 
 // Event delegation
 calculator.addEventListener("click", (e) => {
@@ -34,89 +35,59 @@ calculator.addEventListener("click", (e) => {
   }
 });
 
-// CLicking number buttons
+// Clicking number buttons
 
 const numberClicked = function (btn) {
-  // if something is in memory, or operation was chosen, allow to clear result field
-  // if (result.textContent === 0)
-  if (
-    displayedResult.textContent === "0" ||
-    Number(memory) === Number(displayedResult.textContent)
-  ) {
+  // Add numbers to displayedResult, if number is not 0.
+  // If its 0, change it to clicked number.
+  // If there is a number in memory, change displayed Result to clicked number, and then add another numbers to it
+  if (newCalculation === true) {
     displayedResult.textContent = btn.textContent;
-  } else {
-    displayedResult.textContent += btn.textContent;
+    newCalculation = 0;
+    return;
   }
+  Number(displayedResult.textContent) === 0
+    ? (displayedResult.textContent = btn.textContent)
+    : (displayedResult.textContent += btn.textContent);
+
+  // Number(displayedResult.textContent) === 0
+  //   ? (displayedResult.textContent = btn.textContent)
+  //   : (displayedResult.textContent += btn.textContent);
 };
 
 const operationClicked = function (btn) {
-  if (!chosenOperation) {
-    memory = displayedResult.textContent;
-    chosenOperation = btn.textContent;
-  } else {
-    if (memory === undefined) return;
-    console.log("zapierdala");
-    result = displayedResult.textContent;
-    calculate(Number(memory), Number(result), chosenOperation);
-    chosenOperation = btn.textContent;
-  }
-  console.log(`M: ${memory}    R: ${result}    ${chosenOperation}`);
+  result = Number(displayedResult.textContent);
+  if (operation === btn.textContent) return;
+  if (operation) calculate(memory, result, operation);
+  memory = result;
+  operation = btn.textContent;
+  newCalculation = true;
 };
 
 const calculate = function (a, b, op) {
   console.log(a, b, op);
   switch (op) {
     case "+":
-      result = add(a, b);
-      pOp = op;
+      result = a + b;
       break;
     case "-":
-      result = substract(a, b);
-      pOp = op;
+      result = a - b;
       break;
     case "=":
-      result = calculate(a, b, pOp);
-      pOp = null;
-      break;
+      if (prevOp === "=") result = displayedResult.textContent;
+      calculate(a, b, prevOp);
   }
-  chosenOperation = null;
   displayedResult.textContent = result;
-  memory = result;
+  memory = 0;
+  operation = "";
+  console.log("end of calc");
 };
 
-const add = (a, b) => Number(a) + Number(b);
-const substract = (a, b) => Number(a) - Number(b);
-
-// Old Code
-
-// const numberClicked = function (btn) {
-//   // if something is in memory, or operation was chosen, allow to clear result field
-//   if (operationClicked) result.textContent = "0";
-//   result.textContent === "0"
-//     ? (result.textContent = btn.textContent)
-//     : (result.textContent += btn.textContent);
-// };
-
-// const operationClicked = function (btn) {
-//   // calcIsOn++;
-//   memory = result.textContent;
-//   console.log(memory);
-//   calcResult(chosenOperation);
-// };
-
-// const calcResult = function (operation) {
-//   if (chosenOperation)
-//     // if (calcIsOn > 1)
-//     switch (operation) {
-//       case "+":
-//         result.textContent = add(memory, result.textContent);
-//     }
-// };
-
-// const add = (a, b) => Number(a) + Number(b);
-// const substract = (a, b) => Number(a) - Number(b);
-
-// const clearEverything = function () {
-//   memory = 0;
-//   result.textContent = 0;
-// };
+const clearEverything = function () {
+  memory = 0;
+  newCalculation = false;
+  result = 0;
+  operation = "";
+  prevOp = "";
+  displayedResult.textContent = 0;
+};

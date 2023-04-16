@@ -91,12 +91,12 @@ main {
   grid-row: 4;
 }
 
-.divide,
+/* .divide,
 .substract,
 .multiply,
 .add {
   background-color: blue;
-}
+} */
 
 .substract {
   grid-column: 4;
