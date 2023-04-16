@@ -9,46 +9,36 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div class="calculator">
-      <main>
-        <div class="screen">
-          <div class="results">
-            <!-- <p class="previous-result pResult"></p> -->
-            <p class="current-result cResult">0</p>
-          </div>
+    <div class="container">
+      <div class="calculator">
+        <div class="results">
+          <div class="previousNumber">2</div>
+          <div class="currentNumber">4</div>
         </div>
-        <div class="buttons">
-          <!-- <div class="first-row row"> -->
-          <div class="btn CE">CE</div>
-          <div class="btn C">C</div>
-          <div class="btn DEL">DEL</div>
-          <!-- <div class="btn change-sign btn-op">+/-</div> -->
-          <!-- </div> -->
-          <!-- <div class="second-row row"> -->
-          <div class="btn substract btn-op">-</div>
-          <div class="btn multiply btn-op">x</div>
-          <div class="btn add btn-op">+</div>
-          <div class="btn divide btn-op">÷</div>
-          <!-- </div> -->
-          <!-- <div class="third-row row"> -->
-
-          <div class="btn btn-number">7</div>
-          <div class="btn btn-number">8</div>
-          <div class="btn btn-number">9</div>
-          <div class="btn btn-number">4</div>
-          <div class="btn btn-number">5</div>
-          <div class="btn btn-number">6</div>
-          <div class="btn btn-number">1</div>
-          <div class="btn btn-number">2</div>
-          <div class="btn btn-number">3</div>
-          <!-- </div> -->
-          <!-- <div class="fourth-row row"> -->
-          <div class="btn btn-dot btn-number">.</div>
-          <div class="btn btn-zero btn-number">0</div>
-          <div class="btn btn-equal btn-op">=</div>
-          <!-- </div> -->
-        </div>
-      </main>
+        <!-- Clear most recent entry -->
+        <!-- Clear everything -->
+        <div class="btn btnCE">CE</div>
+        <div class="btn btnC">C</div>
+        <div class="btn changeSign operator">+/-</div>
+        <div class="btn square operator">x²</div>
+        <div class="btn sqrt operator">√</div>
+        <div class="btn divide operator">:</div>
+        <div class="btn number">7</div>
+        <div class="btn number">8</div>
+        <div class="btn number">9</div>
+        <div class="btn multiply operator">*</div>
+        <div class="btn number">4</div>
+        <div class="btn number">5</div>
+        <div class="btn number">6</div>
+        <div class="btn subtract operator">-</div>
+        <div class="btn number">1</div>
+        <div class="btn number">2</div>
+        <div class="btn number">3</div>
+        <div class="btn add operator">+</div>
+        <div class="btn number">.</div>
+        <div class="btn number">0</div>
+        <div class="btn equal operator">=</div>
+      </div>
     </div>
   </body>
 </html>
