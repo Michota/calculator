@@ -4,13 +4,16 @@
 // const result = document.querySelector(".cResult");
 // const previuousResult = document.querySelector(".cPesult");
 const calculator = document.querySelector(".calculator"),
-  result = document.querySelector(".cResult"),
+  displayedResult = document.querySelector(".cResult"),
   previousResult = document.querySelector(".pResult"),
-  btnNumber = document.querySelectorAll(".btn-number");
+  btnNumber = document.querySelectorAll(".btn-number"),
+  clearEverythingBtn = document.querySelector("CE");
 
-let memory = 0;
-let secondMemory = 0;
-let operationType;
+let memory = 0; // "memory" of our calc, which stores a part of a calculation
+let chosenOperation;
+let pOp;
+let result;
+// let calcIsOn = 0; // making possible to change result displayed on the screen
 // const addToMemory = (num) => (memory = Number(num));
 
 // --- Buttons ---
@@ -26,93 +29,82 @@ calculator.addEventListener("click", (e) => {
   if (clicked.classList.contains("btn-op")) {
     operationClicked(clicked);
   }
+  if (clicked.classList.contains("CE")) {
+    clearEverything();
+  }
 });
 
 // CLicking number buttons
 
 const numberClicked = function (btn) {
-  // jeżeli coś jest w memory, to kliknięcie spowoduje usunięcie poprzedniego wyniku
-  if (!operationType)
-    result.textContent === "0"
-      ? (result.textContent = btn.textContent)
-      : (result.textContent += btn.textContent);
+  // if something is in memory, or operation was chosen, allow to clear result field
+  // if (result.textContent === 0)
+  if (
+    displayedResult.textContent === "0" ||
+    memory === displayedResult.textContent
+  ) {
+    displayedResult.textContent = btn.textContent;
+  } else {
+    displayedResult.textContent += btn.textContent;
+  }
 };
 
 const operationClicked = function (btn) {
-  let operationResult;
-  memory = result.textContent;
-  operationType = btn.textContent;
-  switch (operationType) {
+  memory = displayedResult.textContent;
+  chosenOperation = btn.textContent;
+  console.log(`M: ${memory}    R: ${displayedResult.textContent}`);
+};
+
+const calculate = function (a, b, op) {
+  console.log(memory);
+  switch (op) {
     case "+":
-      operationResult = add(memory, result.textContent);
+      displayedResult.textContent = add(a, b);
+      pOp = op;
+      break;
+    case "-":
+      displayedResult.textContent = substract(a, b);
+      pOp = op;
+      break;
+    case "=":
+      calculate(a, b, pOp);
+      break;
   }
-  result.textContent = operationResult;
-  operationType = "";
 };
 
 const add = (a, b) => Number(a) + Number(b);
 const substract = (a, b) => Number(a) - Number(b);
 
-// OLD CODE
+// Old Code
+
+// const numberClicked = function (btn) {
+//   // if something is in memory, or operation was chosen, allow to clear result field
+//   if (operationClicked) result.textContent = "0";
+//   result.textContent === "0"
+//     ? (result.textContent = btn.textContent)
+//     : (result.textContent += btn.textContent);
+// };
 
 // const operationClicked = function (btn) {
-//   switch (btn.textContent) {
-//     case "=":
-//       if (memory) {
-//         operationClicked(previousOperation);
-//         memory = "";
-//       }
-//       break;
-//     case "+":
-//       if (memory) {
-//         result.textContent = Number(memory) + Number(result.textContent);
-//         memory = "";
-//       }
-//       break;
-//     case "-":
-//       if (memory) {
-//         result.textContent = Number(memory) - Number(result.textContent);
-//         memory = "";
-//       }
-//       break;
-//   }
+//   // calcIsOn++;
 //   memory = result.textContent;
-//   previousOperation = btn.textContent;
 //   console.log(memory);
+//   calcResult(chosenOperation);
 // };
 
-// OLD CODE
-
-// const calculationOperation = function (btn) {
-//   memoryCalc();
-//   switch (btn) {
-//     case "+":
-//       console.log(add(calculation + result.textContent));
-//       break;
-//     case "-":
-//       substract(previousResult.textContent + result.textContent);
-//   }
+// const calcResult = function (operation) {
+//   if (chosenOperation)
+//     // if (calcIsOn > 1)
+//     switch (operation) {
+//       case "+":
+//         result.textContent = add(memory, result.textContent);
+//     }
 // };
 
-// // Operations
+// const add = (a, b) => Number(a) + Number(b);
+// const substract = (a, b) => Number(a) - Number(b);
 
-// const currentToPreviousResult = () => {
-//   previousResult.textContent = result.textContent;
+// const clearEverything = function () {
+//   memory = 0;
 //   result.textContent = 0;
 // };
-
-// const memoryCalc = () => (calculation = result.textContent);
-
-// const add = (a, b) => a + b;
-// const substract = (a, b) => a - b;
-
-// btnNumber.forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     // if result = 0, then clear
-//     result.textContent === "0"
-//       ? (result.textContent = btn.textContent)
-//       : (result.textContent += btn.textContent);
-//   });
-// });
-
-// --- Function Buttons ---
