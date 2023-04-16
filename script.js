@@ -5,15 +5,18 @@ const prevNum = document.querySelector(".previousNumber"),
   currNum = document.querySelector(".currentNumber"),
   btnNum = document.querySelector(".number"),
   btnOpe = document.querySelector(".operator"),
-  calcBody = document.querySelector(".calculator");
+  calcBody = document.querySelector(".calculator"),
+  resultBlock = document.querySelector(".results");
 
-// Item delegation
+// Variables
 
 let currentNumber = 0;
 let previousNumber = 0;
 let operator = "";
 let result = 0;
 let previousOperator = "";
+
+// Item delegation
 
 calcBody.addEventListener("click", (e) => {
   e.preventDefault();
@@ -109,7 +112,7 @@ function calc(a, b, op) {
   }
 }
 
-// Clear functions
+// // Clear functions //
 // Clear most recent entry
 function clearCE() {
   console.log("CE: recent entry cleared!");
@@ -129,32 +132,14 @@ function clearC() {
   prevNum.textContent = "";
 }
 
-// Old,  bugged code
-/*
-function saveNum() {
-  prevNum.textContent = previousNumber = Number(currNum.textContent);
-  currNum.textContent = Number(currentNumber);
-  currentNumber = 0;
-}
+// // Copy Result //
 
-function clearNum() {
-  prevNum.textContent = "";
-  previousNumber = 0;
-  currNum.textContent = currentNumber = Number(currentNumber);
-}
-
-function operatorClicked(op) {
-  if (operator) {
-    operator = "";
-    switch (op) {
-      case "+":
-        result = Number(currentNumber) + Number(previousNumber);
-        break;
-    }
-    clearNum();
-  }
-  currNum.textContent = currentNumber = result;
-  saveNum();
-  operator = op;
-}
-*/
+resultBlock.addEventListener("click", (e) => {
+  const info = document.querySelector(".copied-info");
+  const text = e.target.closest(".currentNumber");
+  navigator.clipboard.writeText(text.textContent);
+  info.classList.remove("transparent");
+  setTimeout(() => {
+    info.classList.add("transparent");
+  }, 2000);
+});
