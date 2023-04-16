@@ -35,9 +35,10 @@ calculator.addEventListener("click", (e) => {
   }
 });
 
-// Clicking number buttons
+// Clicking number buttonslive-server
 
 const numberClicked = function (btn) {
+  if (displayedResult.textContent.includes(".")) return;
   // Add numbers to displayedResult, if number is not 0.
   // If its 0, change it to clicked number.
   // If there is a number in memory, change displayed Result to clicked number, and then add another numbers to it
@@ -73,10 +74,16 @@ const calculate = function (a, b, op) {
     case "-":
       result = a - b;
       break;
+    case "x":
+      result = a * b;
+      break;
+    case "÷":
+      result = a / b;
     case "=":
       if (prevOp === "=") result = displayedResult.textContent;
       calculate(a, b, prevOp);
   }
+  // result = checkResult(result.toString());
   displayedResult.textContent = result;
   memory = 0;
   operation = "";
@@ -91,3 +98,7 @@ const clearEverything = function () {
   prevOp = "";
   displayedResult.textContent = 0;
 };
+
+// const checkResult = function (res) {
+//   if (res.length > 15) res = res.slice(0, 12) + "...";
+// };
