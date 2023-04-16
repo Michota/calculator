@@ -41,7 +41,7 @@ const numberClicked = function (btn) {
   // if (result.textContent === 0)
   if (
     displayedResult.textContent === "0" ||
-    memory === displayedResult.textContent
+    Number(memory) === Number(displayedResult.textContent)
   ) {
     displayedResult.textContent = btn.textContent;
   } else {
@@ -50,26 +50,38 @@ const numberClicked = function (btn) {
 };
 
 const operationClicked = function (btn) {
-  memory = displayedResult.textContent;
-  chosenOperation = btn.textContent;
-  console.log(`M: ${memory}    R: ${displayedResult.textContent}`);
+  if (!chosenOperation) {
+    memory = displayedResult.textContent;
+    chosenOperation = btn.textContent;
+  } else {
+    if (memory === undefined) return;
+    console.log("zapierdala");
+    result = displayedResult.textContent;
+    calculate(Number(memory), Number(result), chosenOperation);
+    chosenOperation = btn.textContent;
+  }
+  console.log(`M: ${memory}    R: ${result}    ${chosenOperation}`);
 };
 
 const calculate = function (a, b, op) {
-  console.log(memory);
+  console.log(a, b, op);
   switch (op) {
     case "+":
-      displayedResult.textContent = add(a, b);
+      result = add(a, b);
       pOp = op;
       break;
     case "-":
-      displayedResult.textContent = substract(a, b);
+      result = substract(a, b);
       pOp = op;
       break;
     case "=":
-      calculate(a, b, pOp);
+      result = calculate(a, b, pOp);
+      pOp = null;
       break;
   }
+  chosenOperation = null;
+  displayedResult.textContent = result;
+  memory = result;
 };
 
 const add = (a, b) => Number(a) + Number(b);
